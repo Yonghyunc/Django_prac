@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>회원정보수정</h1>
+  <hr>
+  <form action="{% url 'accounts:update' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col">
+        {{ form.as_p }}
+        <input type="submit" value="확인">
+      </div>
+    </div>
+  </form>
+
+{% endblock content %}
