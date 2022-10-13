@@ -1,0 +1,44 @@
+a {
+  font-size: 1em;
+  text-decoration: none;
+  font-family: 'Gowun Dodum', 'Permanent Marker', cursive;
+}
+
+
+input {
+  font-size: 1rem;
+
+}
+
+input[type="submit"] {
+  font-family: 'Gowun Dodum', FontAwesome;
+}
+
+form {
+  display: inline;
+  text-align: center;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+  font-family: 'Gowun Dodum', 'Peralta';
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+  font-family: 'Gowun Dodum', 'Permanent Marker', cursive;
+}
+
+body {
+  font-family: 'Gowun Dodum', 'Permanent Marker', cursive;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: 'Gowun Dodum';
+}

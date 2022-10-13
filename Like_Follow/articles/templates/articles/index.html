@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <h1>HOME</h1>
+  <a href="{% url 'articles:create' %}">CREATE</a>
+  <hr>
+  {% for article in articles %}
+  <div style="width: 70%; height:150px; float:left;">
+    <h4><a href="{% url 'articles:detail' article.pk %}">No. {{ article.pk }}</a></h4>
+    <h3>TITLE : {{ article.title }}</h3>
+    <p><i class="fa-regular fa-user"></i>  <a href="{% url 'accounts:profile' article.user %}">{{ article.user }}</a></p>
+    <hr>
+  </div>
+  <div style="width: 30%; height:150px; float:right;">
+    <form action="{% url 'articles:likes' article.pk %}" method="POST">
+      {% csrf_token %}
+      {% if request.user in article.like_users.all %}
+        <label for="unlike"><i class="fa-solid fa-heart"></i></label>
+        <input type="submit" id="unlike" value="" class="btn btn-link text-decoration-none">
+      {% else %}
+      <label for="like"><i class="fa-regular fa-heart"></i></label>
+        <input type="submit" id = "like" value="" class="btn btn-link text-decoration-none">
+      {% endif %}
+    </form>
+  </div>
+  <hr>
+  {% endfor %}  
+
+{% endblock content %}
+
+

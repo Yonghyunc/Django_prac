@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <h1>{{ person.username }}'s PROFILE</h1>
+  <div>
+    <b>팔로워</b> {{ person.followers.all|length }}  |   <b>팔로잉</b> {{ person.followings.all|length }}
+  </div>
+  <br>
+  {% if request.user != person %}
+    <div>
+      <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+        {% csrf_token %}
+        {% if request.user in person.followers.all %}
+          <input type="submit" value="팔로우 취소">
+        {% else %}
+          <input type="submit" value="팔로우">
+        {% endif %}
+      </form>
+    </div>
+  {% endif %}
+
+  <hr>
+  <h2>{{ person.username }}'s ARTICLES</h2>
+  {% for article in person.article_set.all %}
+    <div>
+      {{ article.title }}
+      ❤ {{ article.like_users.all|length }}
+    </div>
+  {% endfor %}
+  <hr>
+  <h2>{{ person.username}}'s COMMENTS</h2>
+  {% for comment in person.comment_set.all %}
+    <div>{{ comment.content }}</div>
+  {% endfor %}
+  <hr>
+  <h2>{{ person.username }}'s LIKES</h2>
+  {% for article in person.like_articles.all %}
+    <div>{{ article.title }}</div>
+  {% endfor %}
+  <hr>
+
+  <a href="{% url 'articles:index' %}">HOME</a>
+{% endblock content %}
