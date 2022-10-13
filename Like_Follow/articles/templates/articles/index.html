@@ -16,11 +16,9 @@
     <form action="{% url 'articles:likes' article.pk %}" method="POST">
       {% csrf_token %}
       {% if request.user in article.like_users.all %}
-        <label for="unlike"><i class="fa-solid fa-heart"></i></label>
-        <input type="submit" id="unlike" value="" class="btn btn-link text-decoration-none">
+        <input type="submit" value="&#xf004;" class="btn btn-link text-decoration-none text-danger">
       {% else %}
-      <label for="like"><i class="fa-regular fa-heart"></i></label>
-        <input type="submit" id = "like" value="" class="btn btn-link text-decoration-none">
+        <input type="submit" value="&#xf004;" class="btn btn-link text-decoration-none text-dark">
       {% endif %}
     </form>
   </div>
