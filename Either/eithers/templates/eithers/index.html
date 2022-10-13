@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <h1 class="text-center"><b>Either Game</b></h1>
+    <form action="{% url 'eithers:create' %}" class="mb-2">
+      <input type="submit" class="btn btn-warning shadow rounded offset-4 col-4" value="CREATE NEW GAME" >
+    </form>
+    <form action="{% url 'eithers:detail' random_id %}">
+      <input type="submit" class="btn btn-info shadow rounded offset-4 col-4" value="RANDOM GAME" >
+    </form>
+  </div>
+  {% comment %} <a href="{% url 'eithers:create' %}">CREATE</a> {% endcomment %}
+  <hr>
+  <div class="card row mb-3 shadow p-3 mb-5 rounded" style="background-color:#DBF1FE;" >
+    <div class="row card-body mx-3 " >
+      {% for vote in votes %}
+      <h3 class="col-sm-10"><b>{{ vote.title }}</b></h3>
+      <form action="{% url 'eithers:detail' vote.pk %}" class="col-sm-2">
+        <input type="submit" value="VOTE ▶" class="btn btn-lg btn-link text-end text-decoration-none text-black">
+      </form>
+      <hr class="two" style="border:dotted 2px; width: 95%;">
+      {% comment %} <li class="divider"></li> {% endcomment %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}
+
