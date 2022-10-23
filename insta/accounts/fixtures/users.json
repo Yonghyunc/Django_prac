@@ -1,0 +1,20 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$RCMaSIr5PO12KPFKScgTg4$10Vs0SO0GaLJUY8hC1ERkbuEYjjNMdoTxaGuYkDu2VI=",
+        "last_login": "2022-10-22T14:37:42.908Z",
+        "is_superuser": false,
+        "username": "yong",
+        "first_name": "yong",
+        "last_name": "cho",
+        "email": "yong12@ssafy.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-10-22T14:02:31.839Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

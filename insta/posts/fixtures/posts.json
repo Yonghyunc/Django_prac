@@ -1,0 +1,50 @@
+[
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "content": "냥냥냥",
+        "image": "photos/300px-5ef7cec4bfb4f_Tlmmjqz.jpg"
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+        "content": "냥귀",
+        "image": "photos/img_TrNRWCl.jpg"
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 3,
+    "fields": {
+        "content": "동물의 왕은 고양이",
+        "image": "photos/art_16599350966819_1053f2.jpg"
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 4,
+    "fields": {
+        "content": "고양이가 없는 세상은 얼마나 끔찍할까",
+        "image": "photos/5e0f920d954bda5354419594_VSnsy4i.jpg"
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 5,
+    "fields": {
+        "content": "내 이름이 귀여워인가 왜 자꾸 나한테 귀여워라고 하지?",
+        "image": "photos/_126241775_getty_cats.jpg"
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 6,
+    "fields": {
+        "content": "공양잉",
+        "image": "photos/download.jpg"
+    }
+}
+]
