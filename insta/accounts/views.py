@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import (
     login as auth_login,
@@ -13,8 +12,10 @@ from django.views.decorators.http import (
     require_http_methods,
 )
 from django.contrib.auth.decorators import login_required
+from .models import User, Profile
 
 
+@require_http_methods(['GET', 'POST'])
 def login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
@@ -29,12 +30,14 @@ def login(request):
     return render(request, 'accounts/login.html', context)
 
 
+@require_POST
 def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)
     return redirect('accounts:login')
 
 
+@require_http_methods(['GET', 'POST'])
 def signup(request):
     if request.user.is_authenticated:
         return redirect('posts:index')
@@ -53,6 +56,7 @@ def signup(request):
     return render(request, 'accounts/signup.html', context)
 
 
+@require_http_methods(['GET', 'POST'])
 @login_required()
 def delete(request):
     if request.user.is_authenticated:
@@ -66,6 +70,7 @@ def delete(request):
         return redirect('accounts:login')
 
 
+@require_http_methods(['GET', 'POST'])
 @login_required()
 def update(request):
     if request.method == 'POST':
@@ -81,6 +86,7 @@ def update(request):
     return render(request, 'accounts/update.html', context)
 
 
+@require_http_methods(['GET', 'POST'])
 @login_required()
 def change_password(request):
     if request.method == 'POST':
@@ -96,3 +102,21 @@ def change_password(request):
         'form': form,
     }
     return render(request, 'accounts/password.html', context)
+
+
+@require_safe
+def profile(request, user_name):
+    user = User.objects.get(username=user_name)
+    profile = Profile.objects.get(user=user.pk)
+    context = {
+        'profile': profile,
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+@login_required
+def profile_update(request):
+    if request.user.is_authenticated:
+        pass
+    else:
+        return redirect('accounts:login')

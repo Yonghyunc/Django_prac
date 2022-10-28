@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if username == user %}
+    <h1>환영합니다! {{ user }}</h1>
+  {% endif %}
+  
+  {% if nickname %}
+    <p>닉네임 : {{ nickname }}</p>
+  {% endif %}
+  {% if introduction %}
+    <p>자기소개 : {{ introduction }}</p>
+  {% endif %}
+  {% if image_file %}
+    <img src="{{ image_file.url }}" alt="{{ image_file }}">
+  {% endif %}
+
+  
+{% endblock content %}
