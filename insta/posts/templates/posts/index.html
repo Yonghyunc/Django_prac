@@ -2,18 +2,18 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-  <h1>고양이는 귀여워</h1>
-  <form action="{% url 'accounts:logout' %}" method="POST" class="d-inline">
-    {% csrf_token %}
-    <input type="submit" value="로그아웃" class="btn btn-secondary">
-  </form>
-  <form action="{% url 'accounts:update' %}" method="POST" class="d-inline">
-    {% csrf_token %}
-    <input type="submit" value="프로필 수정" class="btn btn-warning">
-  </form>
-  <a href="{% url 'accounts:password' %}" class="btn btn-primary">비밀번호 변경</a>
-  <a href="{% url 'accounts:delete' %}" class="btn btn-danger">회원 탈퇴</a>
-{% endif %}
+    <h1>고양이는 귀여워</h1>
+    <form action="{% url 'accounts:logout' %}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <input type="submit" value="로그아웃" class="btn btn-secondary">
+    </form>
+    <form action="{% url 'accounts:update' %}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <input type="submit" value="프로필 수정" class="btn btn-warning">
+    </form>
+    <a href="{% url 'accounts:password' %}" class="btn btn-primary">비밀번호 변경</a>
+    <a href="{% url 'accounts:delete' %}" class="btn btn-danger">회원 탈퇴</a>
+  {% endif %}
   <hr>
   <div class="row">
     {% for post in posts %}

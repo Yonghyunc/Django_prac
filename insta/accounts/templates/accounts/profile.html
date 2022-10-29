@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% if username == user %}
-    <h1>환영합니다! {{ user }}</h1>
+  {% comment %} {% if person.user == user %} {% endcomment %}
+    <h1>환영합니다! {{ person.username }}</h1>
+  {% comment %} {% endif %} {% endcomment %}
+  <br>
+  {% if profile.nickname %}
+    <p>닉네임 : {{ profile.nickname }}</p>
   {% endif %}
-  
-  {% if nickname %}
-    <p>닉네임 : {{ nickname }}</p>
+  {% if profile.introduction %}
+    <p>자기소개 : {{ profile.introduction }}</p>
   {% endif %}
-  {% if introduction %}
-    <p>자기소개 : {{ introduction }}</p>
-  {% endif %}
-  {% if image_file %}
-    <img src="{{ image_file.url }}" alt="{{ image_file }}">
+  {% if profile.image_file %}
+    <img src="{{ profile.image_file.url }}" alt="{{ person.image_file }}">
   {% endif %}
 
+  {% if user == request.user %}
+  <form action="{% url 'accounts:logout' %}" method="POST" class="d-inline">
+    {% csrf_token %}
+    <input type="submit" value="로그아웃" class="btn btn-secondary">
+  </form>
+  <a href="{% url 'accounts:profile_update' %}" class="btn btn-warning">프로필 수정</a>
+  <a href="{% url 'accounts:password' %}" class="btn btn-primary">비밀번호 변경</a>
+  <a href="{% url 'accounts:delete' %}" class="btn btn-danger">회원 탈퇴</a>
+{% endif %}
   
 {% endblock content %}

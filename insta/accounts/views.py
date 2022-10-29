@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import (
     login as auth_login,
     logout as auth_logout,
     update_session_auth_hash,
 )
-from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm, ProfileForm
 from django.views.decorators.http import (
     require_safe,
     require_POST,
@@ -73,13 +74,15 @@ def delete(request):
 @require_http_methods(['GET', 'POST'])
 @login_required()
 def update(request):
+    User = get_user_model()
+    user = User.objects.get(username=request.user)
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             return redirect('posts:index')
     else:
-        form = CustomUserChangeForm(instance=request.user)
+        form = CustomUserChangeForm(instance=user)
     context = {
         'form': form,
     }
@@ -106,9 +109,11 @@ def change_password(request):
 
 @require_safe
 def profile(request, user_name):
-    user = User.objects.get(username=user_name)
-    profile = Profile.objects.get(user=user.pk)
+    User = get_user_model()
+    person = User.objects.get(username=user_name)
+    profile = Profile.objects.get(user_id=person.pk)
     context = {
+        'person': person,
         'profile': profile,
     }
     return render(request, 'accounts/profile.html', context)
@@ -116,7 +121,17 @@ def profile(request, user_name):
 
 @login_required
 def profile_update(request):
-    if request.user.is_authenticated:
-        pass
+    User = get_user_model()
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', request.user)
     else:
-        return redirect('accounts:login')
+        form = ProfileForm(instance=profile)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/profile_update.html', context)
